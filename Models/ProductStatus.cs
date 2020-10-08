@@ -1,4 +1,4 @@
-namespace Models
+namespace SalesProductApi.Models
 {
     public enum ProductStatus
     {
