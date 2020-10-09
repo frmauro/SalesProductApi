@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using DB;
+using SalesProductApi.DB;
 using SalesProductApi.Models;
 
 namespace Controllers
@@ -20,9 +20,59 @@ namespace Controllers
         }
 
          [HttpGet]
-        public ActionResult<IEnumerable<Product>> GetProducts()
+        public ActionResult<IEnumerable<ProductViewModel>> GetProducts()
         {
-            return _context.Products;
+            var products = _context.Products;
+            var vms = new List<ProductViewModel>();
+
+            products.ToList().ForEach(product => {
+                    var vm = new ProductViewModel();
+                    vm.Amount = product.Amount;
+                    vm.Description = product.Description;
+                    vm.Id = product.ProductId;
+                    vm.Status = product.Status.ToString();
+                    vm.Price = product.Price.ToString();
+                    vms.Add(vm);
+            });
+
+            return vms;
         }
+
+
+        // GET: api/Product/5
+        [HttpGet("{id}")]
+        public async Task<ActionResult<ProductViewModel>> GetProduct(long id)
+        {
+            var product = await _context.Products.FindAsync(id);
+
+            if (product == null)
+            {
+                return NotFound();
+            }
+
+            var vm = new ProductViewModel();
+            vm.Amount = product.Amount;
+            vm.Description = product.Description;
+            vm.Id = product.ProductId;
+            vm.Status = product.Status.ToString();
+            vm.Price = product.Price.ToString();
+            
+            return vm;
+        }
+
+        [HttpPost]
+        public ActionResult<ProductViewModel> Create(ProductViewModel vm)
+        {
+                var product = new Product { Description = vm.Description, Amount = vm.Amount };
+
+                if (vm.Status == "Active")
+                    product.Status = ProductStatus.Active;
+                else
+                    product.Status = ProductStatus.Inactive;
+
+                    return CreatedAtAction(nameof(GetProduct), new { id = product.ProductId }, product);
+        }
+
+
     }
 }

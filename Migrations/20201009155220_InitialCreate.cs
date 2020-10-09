@@ -8,7 +8,7 @@ namespace SalesProductApi.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Produts",
+                name: "Products",
                 columns: table => new
                 {
                     ProductId = table.Column<int>(nullable: false)
@@ -20,14 +20,14 @@ namespace SalesProductApi.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Produts", x => x.ProductId);
+                    table.PrimaryKey("PK_Products", x => x.ProductId);
                 });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Produts");
+                name: "Products");
         }
     }
 }

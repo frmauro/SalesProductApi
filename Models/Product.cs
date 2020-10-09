@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace SalesProductApi.Models
 {
     public class Product
@@ -14,7 +16,7 @@ namespace SalesProductApi.Models
             this.Status = status;
          }
 
-
+        [Key]
         public int ProductId { get; set; }
         public string Description { get; set; }
         public int Amount { get; set; }

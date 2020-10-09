@@ -11,7 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
-using DB;
+using SalesProductApi.DB;
 
 namespace SalesProductApi
 {
@@ -27,19 +27,12 @@ namespace SalesProductApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            var host = Configuration["DBHOST"] ?? "localhost";
-            var port = Configuration["DBPORT"] ?? "3306";
-            var password  = Configuration["DBPASSWORD"] ?? "123";
-
-            services.AddDbContext<ProductContext>(options  => 
-             options
-             .UseMySql($"server={host};userid=root;pwd={password};" + $"port={port};database=productApi"));
-
             services.AddControllers();
+            services.AddDbContext<ProductContext>(options => options.UseMySql(Configuration.GetConnectionString("myConnection")));       
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ProductContext context)
         {
             if (env.IsDevelopment())
             {
@@ -52,8 +45,9 @@ namespace SalesProductApi
 
             app.UseAuthorization();
 
-            InitialChargeDb.InsertDataInDB(app);
-
+           // InitialChargeDb.InsertDataInDB(app);
+           context.Database.Migrate();
+            
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

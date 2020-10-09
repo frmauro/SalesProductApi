@@ -5,14 +5,13 @@ using Microsoft.Extensions.DependencyInjection;
 using System.Linq;
 using SalesProductApi.Models;
 
-namespace DB
+namespace SalesProductApi.DB
 {
     public static class InitialChargeDb
     {
         public static void InsertDataInDB(IApplicationBuilder app) 
          {
-            InsertDataInDB(
-                app.ApplicationServices.GetRequiredService<ProductContext>());
+            InsertDataInDB(app.ApplicationServices.GetRequiredService<ProductContext>());
          }
         public static void InsertDataInDB(ProductContext context)
         {
