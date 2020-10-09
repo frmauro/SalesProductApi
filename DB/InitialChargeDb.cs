@@ -18,10 +18,10 @@ namespace DB
         {
             System.Console.WriteLine("Aplication Migrations...");
             context.Database.Migrate();
-            if (!context.Produts.Any()) 
+            if (!context.Products.Any()) 
             {
                 System.Console.WriteLine("Creating data...");
-                context.Produts.AddRange(
+                context.Products.AddRange(
                     new Product("Luvas de goleiro", 25, 200, ProductStatus.Active),
                     new Product("Bola de basquete", 225, 100, ProductStatus.Active),
                     new Product("Bola de Futebol", 125, 800, ProductStatus.Active),

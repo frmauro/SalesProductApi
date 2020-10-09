@@ -10,6 +10,6 @@ namespace DB
 
         }
 
-        public DbSet<Product> Produts { get; set; }
+        public DbSet<Product> Products { get; set; }
     }
 }
