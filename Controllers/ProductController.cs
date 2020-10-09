@@ -61,7 +61,7 @@ namespace Controllers
         }
 
         [HttpPost]
-        public ActionResult<ProductViewModel> Create(ProductViewModel vm)
+        public ActionResult<ProductViewModel> Post(ProductViewModel vm)
         {
                 var product = new Product { Description = vm.Description, Amount = vm.Amount };
 
