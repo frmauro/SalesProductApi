@@ -63,12 +63,20 @@ namespace Controllers
         [HttpPost]
         public ActionResult<ProductViewModel> Post(ProductViewModel vm)
         {
-                var product = new Product { Description = vm.Description, Amount = vm.Amount };
+                var product = new Product 
+                {
+                     Description = vm.Description,
+                     Amount = vm.Amount, 
+                     Price = Convert.ToDecimal(vm.Price) 
+                };
 
                 if (vm.Status == "Active")
                     product.Status = ProductStatus.Active;
                 else
                     product.Status = ProductStatus.Inactive;
+
+                    _context.Add(product);
+                    _context.SaveChanges();
 
                     return CreatedAtAction(nameof(GetProduct), new { id = product.ProductId }, product);
         }
