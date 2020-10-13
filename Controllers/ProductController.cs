@@ -82,5 +82,30 @@ namespace Controllers
         }
 
 
+        [HttpPut]
+        public ActionResult<ProductViewModel> Put(ProductViewModel vm)
+        {
+             var product =  _context.Products.Find(vm.Id);
+
+            if (product == null)
+            {
+                return NotFound();
+            }
+                
+            product.Description = vm.Description;
+            product.Amount = vm.Amount; 
+            product.Price = Convert.ToDecimal(vm.Price); 
+                
+
+            if (vm.Status == "Active")
+                product.Status = ProductStatus.Active;
+            else
+                product.Status = ProductStatus.Inactive;
+
+                _context.Update(product);
+                _context.SaveChanges();
+                return CreatedAtAction(nameof(GetProduct), new { id = product.ProductId }, product);
+        }
+
     }
 }
