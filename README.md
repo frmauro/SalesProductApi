@@ -10,3 +10,9 @@ curl -k -d '{"Amount": 200,"Description": "Product 001","Status": "Active","Pric
 
 #comando para acessar o mysql dentro do container
 docker exec -it mysqlserver mysql -u root -p
+
+#comando para do docker para criar a imagem
+docker build --tag salesproductapi .
+
+#comando para criar e rodar o container
+docker run --name salesproductapi -d -p 8087:80 --link mysqlserver salesproductapi
