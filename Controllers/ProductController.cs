@@ -107,5 +107,28 @@ namespace Controllers
                 return CreatedAtAction(nameof(GetProduct), new { id = product.ProductId }, product);
         }
 
+
+        [HttpPost("/UpdateAmount")]
+        public ActionResult<bool> UpdateAmount(IList<ProductViewModel> vms)
+        {
+            try
+            {
+                vms.ToList().ForEach(vm => {
+                            var product =  _context.Products.Find(vm.Id);
+                            if (product != null){
+                                product.Amount -= vm.Amount;
+                                _context.Update(product);
+                                _context.SaveChanges();
+                            }
+                });
+            }
+            catch (System.Exception)
+            {
+                return Ok(false);
+            }
+
+            return Ok(true);
+        }
+
     }
 }
