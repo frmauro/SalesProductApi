@@ -29,7 +29,11 @@ namespace SalesProductApi
         {
             services.AddCors();
             services.AddControllers();
-            services.AddDbContext<ProductContext>(options => options.UseMySql(Configuration.GetConnectionString("myConnection")));       
+            services.AddDbContext<ProductContext>(options => options
+                        .UseMySql(Configuration.GetConnectionString("myConnection"), mySqlOptions =>
+                            mySqlOptions.EnableRetryOnFailure(3))
+                            .EnableDetailedErrors()
+                        );       
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
