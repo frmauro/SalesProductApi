@@ -16,3 +16,6 @@ docker build --tag salesproductapi .
 
 #comando para criar e rodar o container
 docker run --name salesproductapi -d -p 8087:80 --link mysqlserver salesproductapi
+
+## command to create sqlserver container
+sudo docker run -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=Mau123!!!" \ -p 1433:1433 --name sql1 \ -d mcr.microsoft.com/mssql/server:2019-latest

@@ -29,11 +29,8 @@ namespace SalesProductApi
         {
             services.AddCors();
             services.AddControllers();
-            services.AddDbContext<ProductContext>(options => options
-                        .UseMySql(Configuration.GetConnectionString("myConnection"), mySqlOptions =>
-                            mySqlOptions.EnableRetryOnFailure(3))
-                            .EnableDetailedErrors()
-                        );  
+            //services.AddDbContext<ProductContext>(options => options
+              //          .UseSqlServer(Configuration.GetConnectionString("myConnection")));  
             // Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen();                             
         }
