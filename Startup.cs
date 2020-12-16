@@ -59,7 +59,7 @@ namespace SalesProductApi
             app.UseAuthorization();
 
            // InitialChargeDb.InsertDataInDB(app);
-           context.Database.Migrate();
+           //context.Database.Migrate();
             
             app.UseEndpoints(endpoints =>
             {
