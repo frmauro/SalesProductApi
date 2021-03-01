@@ -43,5 +43,12 @@ docker exec -it sql1 /opt/mssql-tools/bin/sqlcmd -S localhost -U sa
 ## link to learn to itereate with sqlserver into container docker    
 https://docs.microsoft.com/pt-br/sql/linux/quickstart-install-connect-docker?view=sql-server-ver15&pivots=cs1-bash
 
+## Use o comando docker exec -it para iniciar um shell bash interativo dentro do contêiner em execução. No exemplo a seguir, sql1 é o nome especificado pelo parâmetro --name na criação do contêiner.
+sudo docker exec -it sql1 "bash"
+
+## Quando estiver dentro do contêiner, conecte-se localmente com a sqlcmd. A sqlcmd não está no caminho por padrão, portanto, você precisará especificar o caminho completo.
+ /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P "<YourNewStrong@Passw0rd>"
+
+
  
 
