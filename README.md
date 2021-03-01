@@ -36,9 +36,10 @@ docker exec -it sql1 /opt/mssql-tools/bin/sqlcmd -S localhost -U sa
 
  ## connectionString conteiner docker out of compose in appsettings.json (ip of local machine)
 
-  "ConnectionStrings": {
-    "myConnection": "Server=192.168.15.32:1433;Database=productApi;User Id=sa;Password=Mau123&&&"
+    "ConnectionStrings": {
+    "myConnection": "Server=127.0.0.1,1433;Database=productApi;User Id=sa;Password=Mau123&&&"
     },
+
 
 ## link to learn to itereate with sqlserver into container docker    
 https://docs.microsoft.com/pt-br/sql/linux/quickstart-install-connect-docker?view=sql-server-ver15&pivots=cs1-bash
