@@ -25,3 +25,19 @@ docker inspect -f "{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}" sql
 
 ## ierate with sqlserver in Container Docker
 docker exec -it sql1 /opt/mssql-tools/bin/sqlcmd -S localhost -U sa
+
+
+## connectionString conteiner docker to compose in appsettings.json
+
+  "ConnectionStrings": {
+    "myConnection": "Server=dbsqlserver;Database=productApi;User Id=sa;Password=Mau123&&&"
+    },
+
+
+ ## connectionString conteiner docker out of compose in appsettings.json (ip of local machine)
+
+  "ConnectionStrings": {
+    "myConnection": "Server=192.168.15.32:1433;Database=productApi;User Id=sa;Password=Mau123&&&"
+    },
+ 
+
