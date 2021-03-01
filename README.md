@@ -48,6 +48,8 @@ sudo docker exec -it sql1 "bash"
 
 ## Quando estiver dentro do contêiner, conecte-se localmente com a sqlcmd. A sqlcmd não está no caminho por padrão, portanto, você precisará especificar o caminho completo.
  /opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P "<YourNewStrong@Passw0rd>"
+  -- OR --
+ docker exec -it sql1 /opt/mssql-tools/bin/sqlcmd -S localhost -U sa
 
 
  
