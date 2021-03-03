@@ -23,8 +23,11 @@ sudo docker run -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=Mau123&&&" \ -p 1433:1433 --n
 ## get ip of container
 docker inspect -f "{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}" sql1
 
-## ierate with sqlserver in Container Docker
+## iterate with sqlserver in Container Docker
 docker exec -it sql1 /opt/mssql-tools/bin/sqlcmd -S localhost -U sa
+
+## command to create docker image 
+docker build --tag salesproductapi .
 
 
 ## connectionString conteiner docker to compose in appsettings.json
