@@ -109,7 +109,7 @@ namespace Controllers
 
 
         [HttpPost("/UpdateAmount")]
-        public ActionResult<bool> UpdateAmount(IList<ProductViewModel> vms)
+        public ActionResult<String> UpdateAmount(IList<ProductViewModel> vms)
         {
             try
             {
@@ -122,12 +122,12 @@ namespace Controllers
                             }
                 });
             }
-            catch (System.Exception)
+            catch (System.Exception ex)
             {
-                return Ok(false);
+                return Ok(ex.Message);
             }
 
-            return Ok(true);
+            return Ok("true");
         }
 
     }
