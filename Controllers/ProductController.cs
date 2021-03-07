@@ -130,5 +130,22 @@ namespace Controllers
             return Ok("true");
         }
 
+        [HttpPost("/TestPost")]
+        public ActionResult<String> TestPost(String vm)
+        {
+            try
+            {
+                var teste = vm;
+            }
+            catch (System.Exception ex)
+            {
+                return Ok(ex.Message);
+            }
+
+            return Ok(vm);
+        }
+
+
     }
+
 }
