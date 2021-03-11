@@ -131,18 +131,19 @@ namespace Controllers
         }
 
         [HttpPost("/TestPost")]
-        public ActionResult<String> TestPost(String vm)
+        public ActionResult<String> TestPost(TestViewModel vm)
         {
+            var teste = string.Empty;
             try
             {
-                var teste = vm;
+                teste = vm.Name;
             }
             catch (System.Exception ex)
             {
                 return Ok(ex.Message);
             }
 
-            return Ok(vm);
+            return Ok(teste);
         }
 
 
