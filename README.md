@@ -29,6 +29,9 @@ docker inspect -f "{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}" sql
 ## iterate with sqlserver in Container Docker
 docker exec -it sql1 /opt/mssql-tools/bin/sqlcmd -S localhost -U sa
 
+## command docker run container 
+docker run --name salesproductapi -d -p 8087:80 --link mysqlserver salesproductapi
+
 ## command to create docker image 
 docker build --tag salesproductapi .
 
