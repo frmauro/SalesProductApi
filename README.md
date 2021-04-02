@@ -15,7 +15,7 @@ docker exec -it mysqlserver mysql -u root -p
 docker build --tag salesproductapi .
 
 #comando para criar e rodar o container
-docker run --name salesproductapi -d -p 8087:80 --link mysqlserver salesproductapi
+docker run --name salesproductapi -d -p 8087:80 --link sql1 salesproductapi
 
 ## command to create sqlserver container
 sudo docker run -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=Mau123&&&" \ -p 1433:1433 --name sql1 \ -d mcr.microsoft.com/mssql/server:2019-latest
@@ -30,7 +30,7 @@ docker inspect -f "{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}" sql
 docker exec -it sql1 /opt/mssql-tools/bin/sqlcmd -S localhost -U sa
 
 ## command docker run container 
-docker run --name salesproductapi -d -p 8087:80 --link mysqlserver salesproductapi
+docker run --name salesproductapi -d -p 8087:80 --link sql1 salesproductapi
 
 ## command to create docker image 
 docker build --tag salesproductapi .

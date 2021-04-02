@@ -130,7 +130,7 @@ namespace Controllers
             return Ok("true");
         }
 
-        [HttpPost("/TestPost")]
+        [HttpPost("TestPost")]
         public ActionResult<String> TestPost(TestViewModel vm)
         {
             var teste = string.Empty;
