@@ -64,6 +64,7 @@ namespace SalesProductApi
             
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapGrpcService<salesproductapi.Services.ProductService>();
                 endpoints.MapControllers();
             });
         }
