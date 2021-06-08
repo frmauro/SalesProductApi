@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+option csharp_namespace = "SalesProductApi";
+
+package SalesProductApi;
+
+// The product service definition.
+service ProductServiceProto {
+  // Sends a product
+  rpc SendProduct (ProductRequest) returns (ProductReply);
+}
+
+// The request message containing the fields product.
+message ProductRequest {
+  int32 id = 1;
+  string description = 2;
+  string amount = 3;
+  string price = 4;
+  string status = 5;
+}
+
+// The response message containing the product.
+message ProductReply {
+  string message = 1;
+}
