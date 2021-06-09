@@ -25,12 +25,12 @@ namespace SalesProductApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddGrpc();
             services.AddCors();
             services.AddControllers();
             services.AddDbContext<ProductContext>(options => options.UseSqlServer(Configuration.GetConnectionString("myConnection")));  
             // Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen();                             
+            services.AddGrpc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -51,7 +51,7 @@ namespace SalesProductApi
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
 
             app.UseRouting();
 
@@ -69,13 +69,9 @@ namespace SalesProductApi
             
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapGrpcService<salesproductapi.Services.ProductService>();
                 endpoints.MapControllers();
+                endpoints.MapGrpcService<salesproductapi.Services.ProductService>();
 
-                endpoints.MapGet("/", async context =>
-                {
-                    await context.Response.WriteAsync("Communication with gRPC endpoints must be made through a gRPC client. To learn how to create a client, visit: https://go.microsoft.com/fwlink/?linkid=2086909");
-                });
             });
         }
         

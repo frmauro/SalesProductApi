@@ -1,4 +1,5 @@
 using System;
+using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
@@ -19,10 +20,16 @@ namespace SalesProductApi
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>();
-                });
+                .ConfigureWebHostDefaults(webBuilder => webBuilder.ConfigureKestrel(options =>
+                    {
+                        options.ListenAnyIP(4999, listenOptions =>  listenOptions.Protocols = HttpProtocols.Http1);
+                        options.ListenAnyIP(5000, listenOptions =>  listenOptions.Protocols = HttpProtocols.Http2);
+                    })
+                    .UseStartup<Startup>());
+                // .ConfigureWebHostDefaults(webBuilder =>
+                // {
+                //     webBuilder.UseStartup<Startup>();
+                // });
 
         private static void CreateDbIfNotExists(IHost host)
             {
