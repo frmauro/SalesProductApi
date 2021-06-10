@@ -8,6 +8,8 @@ package SalesProductApi;
 service ProductServiceProto {
   // Sends a product
   rpc SendProduct (ProductRequest) returns (ProductReply);
+  // get all products
+  rpc GetProducts (Empty) returns (ItemResponse);
 }
 
 // The request message containing the fields product.
@@ -22,4 +24,21 @@ message ProductRequest {
 // The response message containing the product.
 message ProductReply {
   string message = 1;
+}
+
+
+message ProductResponse {
+  int32 id = 1;
+  string description = 2;
+  string amount = 3;
+  string price = 4;
+  string status = 5;
+}
+
+message ItemResponse {
+  repeated ProductResponse items = 1;
+}
+
+message Empty {
+
 }
