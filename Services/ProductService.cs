@@ -29,10 +29,26 @@ namespace salesproductapi.Services
                     product.Price = "200";
                     product.Status = "Active";
                     products.Add(product);
-                    
+
                     response.Items.AddRange(products);
 
                     return Task.FromResult(response);
         }
+
+
+        public override Task<SalesProductApi.ProductResponse> GetProduct(SalesProductApi.ProductId request, ServerCallContext context)
+        {
+                    SalesProductApi.ProductResponse product = new SalesProductApi.ProductResponse();
+                    product.Id = 1;
+                    product.Description = "Product 001";
+                    product.Amount = "200";
+                    product.Price = "200";
+                    product.Status = "Active";
+                    return Task.FromResult(product);
+        }
+
+
+
+
     }
 }

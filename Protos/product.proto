@@ -10,6 +10,8 @@ service ProductServiceProto {
   rpc SendProduct (ProductRequest) returns (ProductReply);
   // get all products
   rpc GetProducts (Empty) returns (ItemResponse);
+  // get product by id
+  rpc GetProduct (ProductId) returns (ProductResponse);
 }
 
 // The request message containing the fields product.
@@ -19,6 +21,10 @@ message ProductRequest {
   string amount = 3;
   string price = 4;
   string status = 5;
+}
+
+message ProductId {
+  int32 id = 1;
 }
 
 // The response message containing the product.
