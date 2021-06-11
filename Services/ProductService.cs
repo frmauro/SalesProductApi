@@ -48,6 +48,18 @@ namespace salesproductapi.Services
         }
 
 
+        public override Task<SalesProductApi.UpdateAmountResponse> UpdateAmount(SalesProductApi.ItemUpdateAmount request, ServerCallContext context)
+        {
+                    SalesProductApi.UpdateAmountResponse response = new SalesProductApi.UpdateAmountResponse();
+                    response.Message = "OK";
+                    var products = request.Items; 
+                    products.ToList().ForEach(product => {
+                        var id =  product.Id;
+                        var amount =  product.Amount;
+                    });
+                    return Task.FromResult(response);
+        }
+
 
 
     }
