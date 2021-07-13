@@ -3,11 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Grpc.Core;
+using SalesProductApi.DB;
+using SalesProductApi.Models;
 
 namespace salesproductapi.Services
 {
     public class ProductService : SalesProductApi.ProductServiceProto.ProductServiceProtoBase
     {
+        private readonly ProductContext _context;
+        public ProductService(ProductContext context)
+        {
+            _context = context;
+        }
         public override Task<SalesProductApi.ProductReply> SendProduct(SalesProductApi.ProductRequest request, ServerCallContext context)
         {
             return Task.FromResult(new SalesProductApi.ProductReply
@@ -23,15 +30,18 @@ namespace salesproductapi.Services
                     SalesProductApi.ItemResponse response = new SalesProductApi.ItemResponse();
                     SalesProductApi.ProductResponse product = new SalesProductApi.ProductResponse();
 
-                    product.Id = 1;
-                    product.Description = "Product 001";
-                    product.Amount = "200";
-                    product.Price = "200";
-                    product.Status = "Active";
-                    products.Add(product);
+                    var productsDb = _context.Products;
+
+                    products.ToList().ForEach(product => {
+                        product.Id = product.Id;
+                        product.Description = product.Description;
+                        product.Amount = product.Amount;
+                        product.Price = product.Price.ToString();
+                        product.Status = product.Status.ToString();
+                        products.Add(product);
+                    });
 
                     response.Items.AddRange(products);
-
                     return Task.FromResult(response);
         }
 
