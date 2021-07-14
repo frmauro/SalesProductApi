@@ -49,11 +49,14 @@ namespace salesproductapi.Services
         public override Task<SalesProductApi.ProductResponse> GetProduct(SalesProductApi.ProductId request, ServerCallContext context)
         {
                     SalesProductApi.ProductResponse product = new SalesProductApi.ProductResponse();
-                    product.Id = 1;
-                    product.Description = "Product 001";
-                    product.Amount = "200";
-                    product.Price = "200";
-                    product.Status = "Active";
+                    var productDb = _context.Products.Find(request.Id);
+
+                    product.Id = productDb.ProductId;
+                    product.Description = productDb.Description;
+                    product.Amount = productDb.Amount.ToString();
+                    product.Price = productDb.Price.ToString();
+                    product.Status = productDb.Status.ToString();
+
                     return Task.FromResult(product);
         }
 
@@ -63,10 +66,18 @@ namespace salesproductapi.Services
                     SalesProductApi.UpdateAmountResponse response = new SalesProductApi.UpdateAmountResponse();
                     response.Message = "OK";
                     var products = request.Items; 
-                    products.ToList().ForEach(product => {
-                        var id =  product.Id;
-                        var amount =  product.Amount;
+                    // products.ToList().ForEach(product => {
+                    //     var id =  product.Id;
+                    //     var amount =  product.Amount;
+                    // });
+
+                    products.ToList().ForEach(vm => {
+                                var product = _context.Products.Find(vm.Id);
+                                product.Amount -= Convert.ToInt32(vm.Amount);
+                                _context.Update(product);
+                                _context.SaveChanges();
                     });
+
                     return Task.FromResult(response);
         }
 
