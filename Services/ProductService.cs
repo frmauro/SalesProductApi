@@ -28,16 +28,16 @@ namespace salesproductapi.Services
         {
                     List<SalesProductApi.ProductResponse> products = new List<SalesProductApi.ProductResponse>();
                     SalesProductApi.ItemResponse response = new SalesProductApi.ItemResponse();
-                    SalesProductApi.ProductResponse product = new SalesProductApi.ProductResponse();
 
-                    var productsDb = _context.Products;
+                    var productsDb = _context.Products.ToList();
 
-                    products.ToList().ForEach(product => {
-                        product.Id = product.Id;
-                        product.Description = product.Description;
-                        product.Amount = product.Amount;
-                        product.Price = product.Price.ToString();
-                        product.Status = product.Status.ToString();
+                    productsDb.ToList().ForEach(productDb => {
+                        var product = new SalesProductApi.ProductResponse();
+                        product.Id = productDb.ProductId;
+                        product.Description = productDb.Description;
+                        product.Amount = productDb.Amount.ToString();
+                        product.Price = productDb.Price.ToString();
+                        product.Status = productDb.Status.ToString();
                         products.Add(product);
                     });
 
