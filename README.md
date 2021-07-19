@@ -33,7 +33,7 @@ docker exec -it sql1 /opt/mssql-tools/bin/sqlcmd -S localhost -U sa
 docker run --name salesproductapi -d -p 8087:80 --link sql1 salesproductapi
 
 ## command docker run container with more then 2 ports (http, grpc)
-docker run --name salesproductapi -d -p 8087:4999 -p 9087:5000 --link sql1 salesproductapi
+docker run --name salesproductapi -d -p 8087:4999 -p 9090:9090 --link sql1 salesproductapi
 
 ## command to create docker image 
 docker build --tag salesproductapi .
