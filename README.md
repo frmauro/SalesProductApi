@@ -58,6 +58,12 @@ docker build --tag salesproductapi .
     },
 
 
+## connectionString conteiner docker Minikube in appsettings.json 
+    "ConnectionStrings": {
+    "myConnection": "Server=productapi;Database=productApi;User Id=sa;Password=Mau123&&&"
+    },
+
+
 ## link to learn to itereate with sqlserver into container docker    
 https://docs.microsoft.com/pt-br/sql/linux/quickstart-install-connect-docker?view=sql-server-ver15&pivots=cs1-bash
 
