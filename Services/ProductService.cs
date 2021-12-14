@@ -18,19 +18,37 @@ namespace salesproductapi.Services
         public override Task<SalesProductApi.ProductReply> SendProduct(SalesProductApi.ProductRequest request, ServerCallContext context)
         {
             ProductStatus status;
+            Product product = null;
 
             if (request.Status == "Active")
                 status = ProductStatus.Active;
             else
                 status = ProductStatus.Inactive;
 
-            var product = new Product(request.Description, Convert.ToInt32(request.Amount), Convert.ToDecimal(request.Price), status);
-            _context.Products.Add(product);
-            _context.SaveChanges();
+            if (request.Id == 0)
+            {
+                product = new Product(request.Description, Convert.ToInt32(request.Amount), Convert.ToDecimal(request.Price), status);
+                _context.Products.Add(product);
+                _context.SaveChanges();
+            }
+            else
+            {
+                product = _context.Products.Find(request.Id);
+                product.Amount = Convert.ToInt32(request.Amount);
+                product.Description = request.Description;
+                product.Price = Convert.ToDecimal(request.Price);
+                if (request.Status == "Active")
+                    product.Status = ProductStatus.Active;
+                else
+                    product.Status = ProductStatus.Inactive;
+
+                _context.Update(product);
+                _context.SaveChanges();
+            }
 
             return Task.FromResult(new SalesProductApi.ProductReply
             {
-                Message = "Product - id: " + product.ProductId + " description: " + product.Description + " amount: " + product.Amount + " price: " + product.Price + " status: " + product.Status
+                Message = product.ProductId.ToString() 
             });
         }
 
