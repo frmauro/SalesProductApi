@@ -23,7 +23,7 @@ namespace SalesProductApi
                 .ConfigureWebHostDefaults(webBuilder => webBuilder.ConfigureKestrel(options =>
                     {
                         options.ListenAnyIP(4999, listenOptions =>  listenOptions.Protocols = HttpProtocols.Http1);
-                        options.ListenAnyIP(9090, listenOptions =>  listenOptions.Protocols = HttpProtocols.Http2);
+                        options.ListenAnyIP(9091, listenOptions =>  listenOptions.Protocols = HttpProtocols.Http2);
                     })
                     .UseStartup<Startup>());
                 // .ConfigureWebHostDefaults(webBuilder =>

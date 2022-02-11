@@ -32,6 +32,7 @@ message ItemUpdateAmount {
 message UpdateAmountRequest {
     int32 id = 1;
     string amount = 2;
+    bool isSum = 3;
 }
 
 message UpdateAmountResponse {

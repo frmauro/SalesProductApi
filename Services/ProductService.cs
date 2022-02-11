@@ -48,7 +48,7 @@ namespace salesproductapi.Services
 
             return Task.FromResult(new SalesProductApi.ProductReply
             {
-                Message = product.ProductId.ToString() 
+                Message = product.ProductId.ToString()
             });
         }
 
@@ -104,7 +104,11 @@ namespace salesproductapi.Services
             products.ToList().ForEach(vm =>
             {
                 var product = _context.Products.Find(vm.Id);
-                product.Amount -= Convert.ToInt32(vm.Amount);
+                if (vm.IsSum)
+                    product.Amount += Convert.ToInt32(vm.Amount);
+                else
+                    product.Amount -= Convert.ToInt32(vm.Amount);
+
                 _context.Update(product);
                 _context.SaveChanges();
             });
