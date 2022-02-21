@@ -75,6 +75,8 @@ sudo docker exec -it sql1 "bash"
   -- OR --
  docker exec -it sql1 /opt/mssql-tools/bin/sqlcmd -S localhost -U sa
 
+ 
+
 ## create request POST via CURL
  curl -X POST -H "Content-Type: application/json" -d '{"Description": "Product 001", "Amount": 200, "Status": "Active", "Price": "200"}' http://localhost:4999/Product
 
