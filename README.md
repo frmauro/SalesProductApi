@@ -81,5 +81,8 @@ sudo docker exec -it sql1 "bash"
  curl -X POST -H "Content-Type: application/json" -d '{"Description": "Product 001", "Amount": 200, "Status": "Active", "Price": "200"}' http://localhost:4999/Product
 
 
+  curl -X POST -H "Content-Type: application/json" -d '{"Description": "Product 008", "Amount": 600, "Status": "Active", "Price": "600"}' http://salesorder.com/CreateProduct
+
+
  
 
