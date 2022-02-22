@@ -60,7 +60,7 @@ docker build --tag salesproductapi .
 
 ## connectionString conteiner docker Minikube in appsettings.json 
     "ConnectionStrings": {
-    "myConnection": "Server=productapi;Database=productApi;User Id=sa;Password=Mau123&&&"
+    "myConnection": "Server=productdb;Database=productApi;User Id=sa;Password=Mau123&&&"
     },
 
 
