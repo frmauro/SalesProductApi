@@ -26,11 +26,12 @@ namespace SalesProductApi
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddCors();
-            services.AddControllers();
             services.AddDbContext<ProductContext>(options => options.UseSqlServer(Configuration.GetConnectionString("myConnection")));  
             // Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen();                             
             services.AddGrpc();
+            //services.AddSingleton<IHostedService, SalesProductApi.HandlersKafka.MessageHandlerKafka>();
+            services.AddControllers();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
