@@ -6,10 +6,10 @@
 ########################################################
 
 
-result=$( docker images -q salesproductapi )
+result=$( docker images -q salesproductapi01 )
 if [[ -n "$result" ]]; then
 echo "image exists"
- docker rmi -f salesproductapi
+ docker rmi -f salesproductapi01
 else
 echo "No such image"
 fi
@@ -28,11 +28,11 @@ fi
 
 cp -a /home/francisco/estudos/azuredevops/myagent/_work/8/s/.  /home/francisco/estudos/azuredevops/myagent/_work/r7/a/
 
-docker build -t salesproductapi .
+docker build -t salesproductapi01 .
 
 echo "built docker images and proceeding to delete existing container"
 echo "Deploying the updated container"
 
-docker run --name salesproductapi -d -p 8087:4999 -p 9090:9090 --link sql1 salesproductapi
+docker run --name salesproductapi -d -p 8087:4999 -p 9090:9090 --link sql1 salesproductapi01
 
 echo "Deploying the container"
