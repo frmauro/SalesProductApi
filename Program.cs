@@ -26,10 +26,6 @@ namespace SalesProductApi
                         options.ListenAnyIP(9091, listenOptions =>  listenOptions.Protocols = HttpProtocols.Http2);
                     })
                     .UseStartup<Startup>());
-                // .ConfigureWebHostDefaults(webBuilder =>
-                // {
-                //     webBuilder.UseStartup<Startup>();
-                // });
 
         private static void CreateDbIfNotExists(IHost host)
             {
