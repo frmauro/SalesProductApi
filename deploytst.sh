@@ -33,6 +33,6 @@ docker build -t salesproductapi .
 echo "built docker images and proceeding to delete existing container"
 echo "Deploying the updated container"
 
-docker run --name salesproductapi -d -p 8087:4999 -p 9090:9090 --link sql1 salesproductapi
+docker run --name salesproductapi -d -p 8087:4999 -p 9091:9091 --link sql1 salesproductapi
 
 echo "Deploying the container"
